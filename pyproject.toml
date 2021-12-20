@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "covidiometro"
+version = "5.0"
+description = "site for covidiometro.it"
+authors = ["Radu Andries"]
+license = "GPLv3"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
