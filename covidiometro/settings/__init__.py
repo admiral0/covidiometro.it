@@ -9,6 +9,8 @@ base_settings = [
     'components/database.py',
     'components/cache.py',
 
+    'components/gitcoviddi.py',
+
     f'environments/{ENV}/__init__.py',
 
     optional('environments/local.py')
