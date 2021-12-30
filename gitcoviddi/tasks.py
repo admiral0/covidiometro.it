@@ -3,6 +3,7 @@ import re
 from celery import shared_task
 from dateutil.parser import parse
 from django.conf import settings
+from django.db.utils import IntegrityError
 from git_adapter.git import Git, CmdError
 
 COMMIT_RE = re.compile(r'^commit\s+([a-f0-9]+)$')
@@ -32,4 +33,8 @@ def update_repository():
         m = DATE_RE.match(line)
         if m:
             update.timestamp = parse(m.group(1))
-    update.save()
+    try:
+        update.save()
+    except IntegrityError:
+        # We already have that commit
+        pass
