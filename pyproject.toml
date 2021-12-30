@@ -15,6 +15,7 @@ git-adapter = "^0.2.5"
 django-split-settings = "^1.1.0"
 psycopg2 = "^2.9.3"
 django-celery-beat = {git = "https://github.com/celery/django-celery-beat", rev = "d25a0afd818da5e85ff660c27ab23957195b3416"}
+python-dateutil = "^2.8.2"
 
 [tool.poetry.dev-dependencies]
 

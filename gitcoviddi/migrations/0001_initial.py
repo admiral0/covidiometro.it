@@ -20,6 +20,12 @@ def create_update_repo_task(apps, schema_editor):
     update_git.save()
 
 
+def remove_update_repo_task(apps, schema_editor):
+    PeriodicTask = apps.get_model('django_celery_beat', 'PeriodicTask')
+
+    PeriodicTask.objects.get(name='update-gitcoviddi').delete()
+
+
 class Migration(migrations.Migration):
 
     initial = True
@@ -34,7 +40,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('timestamp', models.DateTimeField(verbose_name='update time')),
-                ('commit_id', models.CharField(max_length=256)),
+                ('commit_id', models.CharField(max_length=256, unique=True)),
             ],
         ),
         migrations.CreateModel(
@@ -44,5 +50,5 @@ class Migration(migrations.Migration):
                 ('timestamp', models.DateTimeField(verbose_name='measurement date')),
             ],
         ),
-        migrations.RunPython(create_update_repo_task)
+        migrations.RunPython(create_update_repo_task, reverse_code=remove_update_repo_task)
     ]

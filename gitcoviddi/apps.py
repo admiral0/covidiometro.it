@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from .tasks import update_repository
 
 
 class GitcoviddiConfig(AppConfig):
@@ -7,4 +6,6 @@ class GitcoviddiConfig(AppConfig):
     name = 'gitcoviddi'
 
     def ready(self):
+        from .tasks import update_repository
+
         update_repository.delay()
